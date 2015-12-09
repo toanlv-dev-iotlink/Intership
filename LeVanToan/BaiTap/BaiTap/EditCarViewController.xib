@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditCarViewController">
             <connections>
                 <outlet property="dpCreateDate" destination="FsM-Vv-SHL" id="qh0-wT-6AW"/>
+                <outlet property="ivAvatar" destination="26H-Rr-G9n" id="7yj-p1-c3S"/>
                 <outlet property="tfCarNumber" destination="Y5B-WE-OTk" id="mcg-gT-kLJ"/>
                 <outlet property="tfFuelCapaticy" destination="M1w-KV-unJ" id="AA1-Ii-7Bh"/>
                 <outlet property="tfMaxSpeed" destination="voO-HE-cap" id="qoE-UK-5a7"/>
@@ -20,7 +21,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="26H-Rr-G9n">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="avatar.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="26H-Rr-G9n">
                     <rect key="frame" x="148" y="41" width="60" height="60"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Model" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z9d-a4-p2J">
@@ -90,10 +91,22 @@
                         <!--2015-12-09 04:39:03 +0000-->
                     </date>
                 </datePicker>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d0w-bl-Vox">
+                    <rect key="frame" x="148" y="41" width="60" height="60"/>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="atChangeAvatar:" destination="-1" eventType="touchUpInside" id="MNt-Nv-gf8"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <point key="canvasLocation" x="300.5" y="325.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="avatar.jpg" width="79" height="79"/>
+    </resources>
 </document>
