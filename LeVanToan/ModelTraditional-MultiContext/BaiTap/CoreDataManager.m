@@ -15,15 +15,7 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
-- (id)init
-{
-    self = [super init];
-    if(self != nil)
-    {
-        
-    }
-    return self;
-}
+
 + (CoreDataManager *)shared{
     static CoreDataManager *shared = nil;
     static dispatch_once_t onceToken;

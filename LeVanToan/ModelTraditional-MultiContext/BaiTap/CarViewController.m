@@ -34,6 +34,9 @@
     // init barbuttonItems
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(actionAdd:)];
     self.navigationItem.rightBarButtonItem = addButton;
+    //CLEAR DATA
+    
+    
     // tao luong background
     NSManagedObjectContext *moc =[[CoreDataManager shared] managedObjectContext];
     dispatch_queue_t _backgroundQueue = dispatch_queue_create("htk", nil);
@@ -68,7 +71,7 @@
 #pragma mark cac ham chay trong thread
 
 
-#pragma mark - Core Data
+#pragma mark - FETCH RESULT CONTROLLER
 - (NSFetchedResultsController*)fetchedResultsController
 {
     if(_fetchedResultsController != nil)
