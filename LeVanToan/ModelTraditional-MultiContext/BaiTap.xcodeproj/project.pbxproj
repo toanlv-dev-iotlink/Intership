@@ -1,0 +1,519 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		190A272C1C181AAB001A328D /* avatar.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 190A272B1C181AAB001A328D /* avatar.jpg */; };
+		1911106F1C17E51E00C41B48 /* EditCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1911106D1C17E51E00C41B48 /* EditCarViewController.m */; };
+		191110701C17E51E00C41B48 /* EditCarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1911106E1C17E51E00C41B48 /* EditCarViewController.xib */; };
+		191110731C180AD400C41B48 /* Car.m in Sources */ = {isa = PBXBuildFile; fileRef = 191110721C180AD400C41B48 /* Car.m */; };
+		193DF89C1C16743D00E5EB1A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 193DF89B1C16743D00E5EB1A /* main.m */; };
+		193DF89F1C16743D00E5EB1A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 193DF89E1C16743D00E5EB1A /* AppDelegate.m */; };
+		193DF8A21C16743D00E5EB1A /* BaiTap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 193DF8A01C16743D00E5EB1A /* BaiTap.xcdatamodeld */; };
+		193DF8AA1C16743D00E5EB1A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 193DF8A91C16743D00E5EB1A /* Images.xcassets */; };
+		193DF8B91C16743D00E5EB1A /* BaiTapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 193DF8B81C16743D00E5EB1A /* BaiTapTests.m */; };
+		193DF8CD1C16917400E5EB1A /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 193DF8CC1C16917400E5EB1A /* CoreDataManager.m */; };
+		193DF8D11C169A3E00E5EB1A /* CarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 193DF8CF1C169A3E00E5EB1A /* CarViewController.m */; };
+		193DF8D21C169A3E00E5EB1A /* CarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 193DF8D01C169A3E00E5EB1A /* CarViewController.xib */; };
+		19AE9D1D1C16ADB0008CD447 /* CarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19AE9D1B1C16ADB0008CD447 /* CarTableViewCell.xib */; };
+		19AE9D201C16C42E008CD447 /* CarDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 19AE9D1F1C16C42E008CD447 /* CarDAO.m */; };
+		19AE9D241C16D948008CD447 /* AddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19AE9D221C16D948008CD447 /* AddViewController.m */; };
+		19AE9D251C16D948008CD447 /* AddViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19AE9D231C16D948008CD447 /* AddViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		193DF8B31C16743D00E5EB1A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 193DF88E1C16743D00E5EB1A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 193DF8951C16743D00E5EB1A;
+			remoteInfo = BaiTap;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		190A272B1C181AAB001A328D /* avatar.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = avatar.jpg; sourceTree = "<group>"; };
+		1911106C1C17E51E00C41B48 /* EditCarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditCarViewController.h; sourceTree = "<group>"; };
+		1911106D1C17E51E00C41B48 /* EditCarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditCarViewController.m; sourceTree = "<group>"; };
+		1911106E1C17E51E00C41B48 /* EditCarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditCarViewController.xib; sourceTree = "<group>"; };
+		191110711C180AD400C41B48 /* Car.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Car.h; sourceTree = "<group>"; };
+		191110721C180AD400C41B48 /* Car.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Car.m; sourceTree = "<group>"; };
+		193DF8961C16743D00E5EB1A /* BaiTap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaiTap.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		193DF89A1C16743D00E5EB1A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		193DF89B1C16743D00E5EB1A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		193DF89D1C16743D00E5EB1A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		193DF89E1C16743D00E5EB1A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		193DF8A11C16743D00E5EB1A /* BaiTap.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BaiTap.xcdatamodel; sourceTree = "<group>"; };
+		193DF8A91C16743D00E5EB1A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		193DF8B21C16743D00E5EB1A /* BaiTapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BaiTapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		193DF8B71C16743D00E5EB1A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		193DF8B81C16743D00E5EB1A /* BaiTapTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaiTapTests.m; sourceTree = "<group>"; };
+		193DF8CB1C16914700E5EB1A /* CoreDataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreDataManager.h; sourceTree = "<group>"; };
+		193DF8CC1C16917400E5EB1A /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataManager.m; sourceTree = "<group>"; };
+		193DF8CE1C169A3E00E5EB1A /* CarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarViewController.h; sourceTree = "<group>"; };
+		193DF8CF1C169A3E00E5EB1A /* CarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarViewController.m; sourceTree = "<group>"; };
+		193DF8D01C169A3E00E5EB1A /* CarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CarViewController.xib; sourceTree = "<group>"; };
+		19AE9D191C16ADB0008CD447 /* CarTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarTableViewCell.h; sourceTree = "<group>"; };
+		19AE9D1A1C16ADB0008CD447 /* CarTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarTableViewCell.m; sourceTree = "<group>"; };
+		19AE9D1B1C16ADB0008CD447 /* CarTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CarTableViewCell.xib; sourceTree = "<group>"; };
+		19AE9D1E1C16C3E8008CD447 /* CarDAO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CarDAO.h; sourceTree = "<group>"; };
+		19AE9D1F1C16C42E008CD447 /* CarDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarDAO.m; sourceTree = "<group>"; };
+		19AE9D211C16D948008CD447 /* AddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddViewController.h; sourceTree = "<group>"; };
+		19AE9D221C16D948008CD447 /* AddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddViewController.m; sourceTree = "<group>"; };
+		19AE9D231C16D948008CD447 /* AddViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		193DF8931C16743D00E5EB1A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		193DF8AF1C16743D00E5EB1A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		190A27261C181316001A328D /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				193DF8CE1C169A3E00E5EB1A /* CarViewController.h */,
+				193DF8CF1C169A3E00E5EB1A /* CarViewController.m */,
+				193DF8D01C169A3E00E5EB1A /* CarViewController.xib */,
+			);
+			name = MainView;
+			sourceTree = "<group>";
+		};
+		190A27271C181366001A328D /* AddView */ = {
+			isa = PBXGroup;
+			children = (
+				19AE9D211C16D948008CD447 /* AddViewController.h */,
+				19AE9D221C16D948008CD447 /* AddViewController.m */,
+				19AE9D231C16D948008CD447 /* AddViewController.xib */,
+			);
+			name = AddView;
+			sourceTree = "<group>";
+		};
+		190A27281C181386001A328D /* EditView */ = {
+			isa = PBXGroup;
+			children = (
+				1911106C1C17E51E00C41B48 /* EditCarViewController.h */,
+				1911106D1C17E51E00C41B48 /* EditCarViewController.m */,
+				1911106E1C17E51E00C41B48 /* EditCarViewController.xib */,
+			);
+			name = EditView;
+			sourceTree = "<group>";
+		};
+		190A27291C1813C4001A328D /* MainViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				19AE9D191C16ADB0008CD447 /* CarTableViewCell.h */,
+				19AE9D1A1C16ADB0008CD447 /* CarTableViewCell.m */,
+				19AE9D1B1C16ADB0008CD447 /* CarTableViewCell.xib */,
+			);
+			name = MainViewCell;
+			sourceTree = "<group>";
+		};
+		190A272A1C1813EC001A328D /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				193DF8CB1C16914700E5EB1A /* CoreDataManager.h */,
+				193DF8CC1C16917400E5EB1A /* CoreDataManager.m */,
+				19AE9D1E1C16C3E8008CD447 /* CarDAO.h */,
+				19AE9D1F1C16C42E008CD447 /* CarDAO.m */,
+				191110711C180AD400C41B48 /* Car.h */,
+				191110721C180AD400C41B48 /* Car.m */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		193DF88D1C16743D00E5EB1A = {
+			isa = PBXGroup;
+			children = (
+				193DF8981C16743D00E5EB1A /* BaiTap */,
+				193DF8B51C16743D00E5EB1A /* BaiTapTests */,
+				193DF8971C16743D00E5EB1A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		193DF8971C16743D00E5EB1A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				193DF8961C16743D00E5EB1A /* BaiTap.app */,
+				193DF8B21C16743D00E5EB1A /* BaiTapTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		193DF8981C16743D00E5EB1A /* BaiTap */ = {
+			isa = PBXGroup;
+			children = (
+				190A272B1C181AAB001A328D /* avatar.jpg */,
+				190A27291C1813C4001A328D /* MainViewCell */,
+				190A272A1C1813EC001A328D /* CoreData */,
+				190A27281C181386001A328D /* EditView */,
+				190A27271C181366001A328D /* AddView */,
+				190A27261C181316001A328D /* MainView */,
+				193DF8991C16743D00E5EB1A /* Supporting Files */,
+				193DF89D1C16743D00E5EB1A /* AppDelegate.h */,
+				193DF89E1C16743D00E5EB1A /* AppDelegate.m */,
+				193DF8A91C16743D00E5EB1A /* Images.xcassets */,
+				193DF8A01C16743D00E5EB1A /* BaiTap.xcdatamodeld */,
+			);
+			path = BaiTap;
+			sourceTree = "<group>";
+		};
+		193DF8991C16743D00E5EB1A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				193DF89A1C16743D00E5EB1A /* Info.plist */,
+				193DF89B1C16743D00E5EB1A /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		193DF8B51C16743D00E5EB1A /* BaiTapTests */ = {
+			isa = PBXGroup;
+			children = (
+				193DF8B81C16743D00E5EB1A /* BaiTapTests.m */,
+				193DF8B61C16743D00E5EB1A /* Supporting Files */,
+			);
+			path = BaiTapTests;
+			sourceTree = "<group>";
+		};
+		193DF8B61C16743D00E5EB1A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				193DF8B71C16743D00E5EB1A /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		193DF8951C16743D00E5EB1A /* BaiTap */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 193DF8BC1C16743D00E5EB1A /* Build configuration list for PBXNativeTarget "BaiTap" */;
+			buildPhases = (
+				193DF8921C16743D00E5EB1A /* Sources */,
+				193DF8931C16743D00E5EB1A /* Frameworks */,
+				193DF8941C16743D00E5EB1A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BaiTap;
+			productName = BaiTap;
+			productReference = 193DF8961C16743D00E5EB1A /* BaiTap.app */;
+			productType = "com.apple.product-type.application";
+		};
+		193DF8B11C16743D00E5EB1A /* BaiTapTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 193DF8BF1C16743D00E5EB1A /* Build configuration list for PBXNativeTarget "BaiTapTests" */;
+			buildPhases = (
+				193DF8AE1C16743D00E5EB1A /* Sources */,
+				193DF8AF1C16743D00E5EB1A /* Frameworks */,
+				193DF8B01C16743D00E5EB1A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				193DF8B41C16743D00E5EB1A /* PBXTargetDependency */,
+			);
+			name = BaiTapTests;
+			productName = BaiTapTests;
+			productReference = 193DF8B21C16743D00E5EB1A /* BaiTapTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		193DF88E1C16743D00E5EB1A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = Z;
+				TargetAttributes = {
+					193DF8951C16743D00E5EB1A = {
+						CreatedOnToolsVersion = 6.4;
+					};
+					193DF8B11C16743D00E5EB1A = {
+						CreatedOnToolsVersion = 6.4;
+						TestTargetID = 193DF8951C16743D00E5EB1A;
+					};
+				};
+			};
+			buildConfigurationList = 193DF8911C16743D00E5EB1A /* Build configuration list for PBXProject "BaiTap" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 193DF88D1C16743D00E5EB1A;
+			productRefGroup = 193DF8971C16743D00E5EB1A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				193DF8951C16743D00E5EB1A /* BaiTap */,
+				193DF8B11C16743D00E5EB1A /* BaiTapTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		193DF8941C16743D00E5EB1A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				191110701C17E51E00C41B48 /* EditCarViewController.xib in Resources */,
+				19AE9D1D1C16ADB0008CD447 /* CarTableViewCell.xib in Resources */,
+				190A272C1C181AAB001A328D /* avatar.jpg in Resources */,
+				193DF8AA1C16743D00E5EB1A /* Images.xcassets in Resources */,
+				19AE9D251C16D948008CD447 /* AddViewController.xib in Resources */,
+				193DF8D21C169A3E00E5EB1A /* CarViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		193DF8B01C16743D00E5EB1A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		193DF8921C16743D00E5EB1A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				191110731C180AD400C41B48 /* Car.m in Sources */,
+				1911106F1C17E51E00C41B48 /* EditCarViewController.m in Sources */,
+				193DF8CD1C16917400E5EB1A /* CoreDataManager.m in Sources */,
+				193DF8D11C169A3E00E5EB1A /* CarViewController.m in Sources */,
+				193DF89F1C16743D00E5EB1A /* AppDelegate.m in Sources */,
+				19AE9D201C16C42E008CD447 /* CarDAO.m in Sources */,
+				193DF89C1C16743D00E5EB1A /* main.m in Sources */,
+				193DF8A21C16743D00E5EB1A /* BaiTap.xcdatamodeld in Sources */,
+				19AE9D241C16D948008CD447 /* AddViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		193DF8AE1C16743D00E5EB1A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				193DF8B91C16743D00E5EB1A /* BaiTapTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		193DF8B41C16743D00E5EB1A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 193DF8951C16743D00E5EB1A /* BaiTap */;
+			targetProxy = 193DF8B31C16743D00E5EB1A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		193DF8BA1C16743D00E5EB1A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		193DF8BB1C16743D00E5EB1A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		193DF8BD1C16743D00E5EB1A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = BaiTap/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		193DF8BE1C16743D00E5EB1A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = BaiTap/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		193DF8C01C16743D00E5EB1A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = BaiTapTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BaiTap.app/BaiTap";
+			};
+			name = Debug;
+		};
+		193DF8C11C16743D00E5EB1A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = BaiTapTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BaiTap.app/BaiTap";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		193DF8911C16743D00E5EB1A /* Build configuration list for PBXProject "BaiTap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				193DF8BA1C16743D00E5EB1A /* Debug */,
+				193DF8BB1C16743D00E5EB1A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		193DF8BC1C16743D00E5EB1A /* Build configuration list for PBXNativeTarget "BaiTap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				193DF8BD1C16743D00E5EB1A /* Debug */,
+				193DF8BE1C16743D00E5EB1A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		193DF8BF1C16743D00E5EB1A /* Build configuration list for PBXNativeTarget "BaiTapTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				193DF8C01C16743D00E5EB1A /* Debug */,
+				193DF8C11C16743D00E5EB1A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		193DF8A01C16743D00E5EB1A /* BaiTap.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				193DF8A11C16743D00E5EB1A /* BaiTap.xcdatamodel */,
+			);
+			currentVersion = 193DF8A11C16743D00E5EB1A /* BaiTap.xcdatamodel */;
+			path = BaiTap.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 193DF88E1C16743D00E5EB1A /* Project object */;
+}
