@@ -38,7 +38,7 @@
     
     
     // tao luong background
-    NSManagedObjectContext *moc =[[CoreDataManager shared] managedObjectContext];
+    //NSManagedObjectContext *moc =[[CoreDataManager shared] managedObjectContext];
     dispatch_queue_t _backgroundQueue = dispatch_queue_create("htk", nil);
     dispatch_async(_backgroundQueue, ^{
 
