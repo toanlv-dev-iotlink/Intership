@@ -9,6 +9,7 @@
 #import "RootViewController.h"
 #import "StudentDAO.h"
 #import "RootTableViewCell.h"
+#import "ChildContext.h"
 
 @interface RootViewController () <UITableViewDataSource,UITableViewDelegate,NSFetchedResultsControllerDelegate>
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
@@ -22,7 +23,7 @@
     self.navigationItem.title = @"Strudent list";
     [self.rootTBV registerNib:[UINib nibWithNibName:@"RootTableViewCell" bundle:nil] forCellReuseIdentifier:@"RootTableViewCell"];
     [[CoreDataManager shared] managedObjectContext];
-    //[self performSelectorInBackground:@selector(loaddata1) withObject:nil];
+    [self performSelectorInBackground:@selector(loaddata1) withObject:nil];
     [self performSelectorInBackground:@selector(loaddata2) withObject:nil];
     [self fetchResultsController];
     NSError *error = nil;
@@ -103,21 +104,20 @@
 }
 -(void)loaddata1{
     
-    if ([NSThread isMainThread]) {
-        
-    }
-    [[[StudentDAO shared] temporaryContext] performBlock:^{
+    ChildContext *child = [[ChildContext alloc] init];
+    [child performBlock:^{
         NSString *name;
-        NSString *mssv = @"mssv";
-        for (int i = 1; i <=10000; i++) {
+        NSString *mssv = @"a";
+        for (int i = 1; i <=5000; i++) {
             name = @(i).stringValue;
-            Student *student = (Student *)[NSEntityDescription insertNewObjectForEntityForName:@"Student" inManagedObjectContext:[[StudentDAO shared] temporaryContext]];
-            student.name = name;
-            student.mssv = mssv;
-            
-            [[StudentDAO shared] childSaveContext];
+            [child addStudent:name mssv:mssv];
+            [child saveContext];
             [[[CoreDataManager shared] managedObjectContext] performBlock:^{
                 [[CoreDataManager shared] saveContext];
+                [[[CoreDataManager shared] writerManagerObjectContext] performBlock:^{
+                    NSError *error = nil;
+                    [[[CoreDataManager shared] writerManagerObjectContext] save:&error];
+                }];
                 
             }];
             NSLog(@"---------1");
@@ -126,56 +126,26 @@
         }];
 }
 -(void)loaddata2{
-    NSManagedObjectContext *temporaryContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-    temporaryContext.parentContext = [[CoreDataManager shared] managedObjectContext];
-    NSString *name=@"gjhgg";
-    NSString *mssv = @"mssv";
-    for (int i = 1; i <=20; i++) {
-        mssv = @(i).stringValue;
-        Student *student = (Student *)[NSEntityDescription insertNewObjectForEntityForName:@"Student" inManagedObjectContext:temporaryContext];
-        student.name = name;
-        student.mssv = mssv;
-        
-        [temporaryContext performBlock:^{
-            // do something that takes some time asynchronously using the temp context
-            
-            // push to parent
-            NSError *error;
-            if (![temporaryContext save:&error])
-            {
-                // handle error
-            }
-            
-            // save parent to disk asynchronously
+    ChildContext *child = [[ChildContext alloc] init];
+    [child performBlock:^{
+        NSString *name;
+        NSString *mssv = @"b";
+        for (int i = 1; i <=5000; i++) {
+            name = @(i).stringValue;
+            [child addStudent:name mssv:mssv];
+            [child saveContext];
             [[[CoreDataManager shared] managedObjectContext] performBlock:^{
-                NSError *error;
-                if (![[[CoreDataManager shared] managedObjectContext] save:&error])
-                {
-                    // handle error
-                }
+                [[CoreDataManager shared] saveContext];
+                [[[CoreDataManager shared] writerManagerObjectContext] performBlock:^{
+                    NSError *error = nil;
+                    [[[CoreDataManager shared] writerManagerObjectContext] save:&error];
+                }];
+                
             }];
-        }];
-    }
-    
-    
-//    [temporaryContext performBlock:^{
-//        NSString *name=@"gjhgg";
-//        NSString *mssv = @"mssv";
-//        for (int i = 1; i <=10000; i++) {
-//            mssv = @(i).stringValue;
-//            Student *student = (Student *)[NSEntityDescription insertNewObjectForEntityForName:@"Student" inManagedObjectContext:temporaryContext];
-//            student.name = name;
-//            student.mssv = mssv;
-//            NSError *error = nil;
-//            [temporaryContext save:&error];
-//            [[[CoreDataManager shared] managedObjectContext] performBlock:^{
-//                [[CoreDataManager shared] saveContext];
-//                
-//            }];
-//            NSLog(@"_______2");
-//            
-//        }
-//    }];
+            NSLog(@"---------2");
+            
+        }
+    }];
 }
 
 @end

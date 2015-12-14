@@ -13,6 +13,7 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+@synthesize writerManagerObjectContext = _writerManagerObjectContext;
 + (CoreDataManager *)shared{
     static CoreDataManager *shared = nil;
     static dispatch_once_t onceToken;
@@ -58,20 +59,31 @@
     return _persistentStoreCoordinator;
 }
 
-
+#pragma mark
 - (NSManagedObjectContext *)managedObjectContext {
     if (_managedObjectContext != nil) {
         return _managedObjectContext;
     }
     
-    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (!coordinator) {
+    NSManagedObjectContext *writer= [self writerManagerObjectContext];
+    if (!writer) {
         return nil;
     }
     _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-
-    [_managedObjectContext setPersistentStoreCoordinator:coordinator];
+    _managedObjectContext.parentContext = [self writerManagerObjectContext];
     return _managedObjectContext;
+}
+#pragma mark WRITER
+-(NSManagedObjectContext *)writerManagerObjectContext {
+    if (_writerManagerObjectContext != nil) {
+        return _writerManagerObjectContext;
+    }
+    NSPersistentStoreCoordinator *coor = [[CoreDataManager shared] persistentStoreCoordinator];
+    if (coor != nil) {
+        _writerManagerObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        _writerManagerObjectContext.persistentStoreCoordinator = coor;
+    }
+    return _writerManagerObjectContext;
 }
 
 #pragma mark - Core Data Saving support
