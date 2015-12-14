@@ -13,11 +13,15 @@
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectContext *tmpManagedOC;
+@property (readonly, strong, nonatomic) NSManagedObjectContext *tmpManagedOC1;
+@property (readonly, strong, nonatomic) NSManagedObjectContext *tmpManagedOC2;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 - (void)saveContext;
 - (void)tmpSaveContext;
+- (void)tmpSaveContext1;
+- (void)tmpSaveContext2;
 - (NSURL *)applicationDocumentsDirectory;
 + (id)shared;
 

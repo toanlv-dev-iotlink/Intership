@@ -15,6 +15,8 @@
 
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize tmpManagedOC = _tmpManagedOC;
+@synthesize tmpManagedOC1 = _tmpManagedOC1;
+@synthesize tmpManagedOC2 = _tmpManagedOC2;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
@@ -102,9 +104,8 @@
     return _tmpManagedOC;
 }
 #pragma mark - Core Data Saving support
-
-- (void)saveContext {
-    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
+- (void)tmpSaveContext {
+    NSManagedObjectContext *managedObjectContext = self.tmpManagedOC;
     if (managedObjectContext != nil) {
         NSError *error = nil;
         if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
@@ -116,8 +117,62 @@
     }
 }
 
-- (void)tmpSaveContext {
+- (NSManagedObjectContext *)tmpManagedOC1{
+    if (_tmpManagedOC != nil) {
+        return _tmpManagedOC;
+    }
+    
+    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    if (!coordinator) {
+        return nil;
+    }
+    _tmpManagedOC = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    _tmpManagedOC.parentContext = self.managedObjectContext;
+    //[_tmpManagedOC setPersistentStoreCoordinator:coordinator];
+    return _tmpManagedOC;
+}
+#pragma mark - Core Data Saving support
+- (void)tmpSaveContext1 {
     NSManagedObjectContext *managedObjectContext = self.tmpManagedOC;
+    if (managedObjectContext != nil) {
+        NSError *error = nil;
+        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            abort();
+        }
+    }
+}
+- (NSManagedObjectContext *)tmpManagedOC2{
+    if (_tmpManagedOC != nil) {
+        return _tmpManagedOC;
+    }
+    
+    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    if (!coordinator) {
+        return nil;
+    }
+    _tmpManagedOC = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    _tmpManagedOC.parentContext = self.managedObjectContext;
+    //[_tmpManagedOC setPersistentStoreCoordinator:coordinator];
+    return _tmpManagedOC;
+}
+#pragma mark - Core Data Saving support
+- (void)tmpSaveContext2 {
+    NSManagedObjectContext *managedObjectContext = self.tmpManagedOC;
+    if (managedObjectContext != nil) {
+        NSError *error = nil;
+        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            abort();
+        }
+    }
+}
+- (void)saveContext {
+    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
     if (managedObjectContext != nil) {
         NSError *error = nil;
         if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {

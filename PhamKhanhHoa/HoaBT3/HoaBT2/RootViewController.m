@@ -24,62 +24,13 @@
     UIBarButtonItem *btDelete = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(actionDelete:)];
     self.navigationItem.rightBarButtonItem = btDelete;
     [[CoreData shared] managedObjectContext];
+
+
+    [self performSelectorInBackground:@selector(getData) withObject:nil];
     
-    //Thread 1
-    dispatch_queue_t _backgroundQueue1 = dispatch_queue_create("Thread 1", nil);//tao hang doi
-    dispatch_async(_backgroundQueue1, ^{
-        [[[CoreData shared] tmpManagedOC] performBlock:^{
-            NSString *name = @"Car Number x";
-            NSString *stt;for (int i = 1; i <= 2000; i++) {
-                stt = @(i).stringValue;
-                CDCar *car = (CDCar *)[NSEntityDescription insertNewObjectForEntityForName:@"CDCar" inManagedObjectContext:[[CoreData shared] tmpManagedOC] ];
-                car.stt = stt;
-                car.name = name;
-                [[CoreData shared] tmpSaveContext];
-                NSLog(@"Thread1->%i",i);
-            }
-            [[[CoreData shared] managedObjectContext] performBlock:^{
-                [[CoreData shared] saveContext];
-            }];
-        }];
-    });
-    //Thread 2
-    dispatch_queue_t _backgroundQueue2 = dispatch_queue_create("Thread 2", nil);//tao hang doi
-    dispatch_async(_backgroundQueue2, ^{
-        [[[CoreData shared] tmpManagedOC] performBlock:^{
-            NSString *name = @"Car Number y";
-            NSString *stt;for (int i = 1; i <= 2000; i++) {
-                stt = @(i).stringValue;
-                CDCar *car = (CDCar *)[NSEntityDescription insertNewObjectForEntityForName:@"CDCar" inManagedObjectContext:[[CoreData shared] tmpManagedOC] ];
-                car.stt = stt;
-                car.name = name;
-                [[CoreData shared] tmpSaveContext];
-                NSLog(@"Thread2->%i",i);
-            }
-            [[[CoreData shared] managedObjectContext] performBlock:^{
-                [[CoreData shared] saveContext];
-            }];
-        }];
-    });
-    //Thread 3
-    dispatch_queue_t _backgroundQueue3 = dispatch_queue_create("Thread 2", nil);//tao hang doi
-    dispatch_async(_backgroundQueue3, ^{
-        [[[CoreData shared] tmpManagedOC] performBlock:^{
-            NSString *name = @"Car Number z";
-            NSString *stt;for (int i = 1; i <= 2000; i++) {
-                stt = @(i).stringValue;
-                CDCar *car = (CDCar *)[NSEntityDescription insertNewObjectForEntityForName:@"CDCar" inManagedObjectContext:[[CoreData shared] tmpManagedOC] ];
-                car.stt = stt;
-                car.name = name;
-                [[CoreData shared] tmpSaveContext];
-                NSLog(@"Thread3->%i",i);
-            }
-            [[[CoreData shared] managedObjectContext] performBlock:^{
-                [[CoreData shared] saveContext];
-            }];
-        }];
-    });
-    //init fetch
+    [[[CoreData shared] managedObjectContext] performBlock:^{
+        [[CoreData shared] saveContext];
+    }];
     NSError *error = nil;
     self.fetchedResultsController.delegate = self;
     if (![self.fetchedResultsController performFetch:&error]) {
@@ -87,6 +38,14 @@
     }
 }
 
+- (void) getData {
+    for (int i=0; i<=20; i++) {
+        [self performSelectorInBackground:@selector(xuLy1) withObject:nil];
+        [self performSelectorInBackground:@selector(xuLy2) withObject:nil];
+        [self performSelectorInBackground:@selector(xuLy3) withObject:nil];
+        
+    }
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
@@ -95,7 +54,49 @@
     [[CarDAO shared] deleteAllCar];
     [tbView reloadData];
 }
--(NSFetchedResultsController *)fetchResultsController {
+- (void)xuLy1{
+        [[[CoreData shared] tmpManagedOC] performBlock:^{
+            NSString *name = @"Car Number x";
+            NSString *stt;
+            for (int i = 1; i <= 3; i++) {
+                stt = @(i).stringValue;
+                CDCar *car = (CDCar *)[NSEntityDescription insertNewObjectForEntityForName:@"CDCar" inManagedObjectContext:[[CoreData shared] tmpManagedOC] ];
+                car.stt = stt;
+                car.name = name;
+                [[CoreData shared] tmpSaveContext];
+                NSLog(@"Thread1->%i",i);
+            }
+        }];
+}
+- (void)xuLy2{
+        [[[CoreData shared] tmpManagedOC1] performBlock:^{
+            NSString *name = @"Car Number y";
+            NSString *stt;
+            for (int i = 1; i <= 3; i++) {
+                stt = @(i).stringValue;
+                CDCar *car = (CDCar *)[NSEntityDescription insertNewObjectForEntityForName:@"CDCar" inManagedObjectContext:[[CoreData shared] tmpManagedOC1] ];
+                car.stt = stt;
+                car.name = name;
+                [[CoreData shared] tmpSaveContext1];
+                NSLog(@"Thread2->%i",i);
+            }
+        }];
+}
+- (void)xuLy3{
+        [[[CoreData shared] tmpManagedOC2] performBlock:^{
+            NSString *name = @"Car Number z";
+            NSString *stt;
+            for (int i = 1; i <= 3; i++) {
+                stt = @(i).stringValue;
+                CDCar *car = (CDCar *)[NSEntityDescription insertNewObjectForEntityForName:@"CDCar" inManagedObjectContext:[[CoreData shared] tmpManagedOC2] ];
+                car.stt = stt;
+                car.name = name;
+                [[CoreData shared] tmpSaveContext2];
+                NSLog(@"Thread3->%i",i);
+            }
+        }];
+}
+-(NSFetchedResultsController *)fetchedResultsController {
     if(_fetchedResultsController != nil)
     {
         return _fetchedResultsController;
@@ -105,7 +106,7 @@
     return _fetchedResultsController;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.fetchResultsController.fetchedObjects.count;
+    return self.fetchedResultsController.fetchedObjects.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *identifier = @"Cell";
@@ -114,7 +115,7 @@
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
     }
-    CDCar *car = [self.fetchResultsController objectAtIndexPath:indexPath];
+    CDCar *car = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = car.stt;
     cell.detailTextLabel.text = car.name;
     return cell;
