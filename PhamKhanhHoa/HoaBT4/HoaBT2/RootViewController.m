@@ -26,16 +26,12 @@
     [[CoreData shared] writeMOC];
     [[CoreData shared] managedObjectContext];
     [[CoreData shared] tmpManagedOC];
+    
 
-
-//    [self performSelectorInBackground:@selector(xuLy1) withObject:nil];
+    [self performSelectorInBackground:@selector(xuLy1) withObject:nil];
+    [self fetchedResultsController];
     
     
-    NSError *error = nil;
-    self.fetchedResultsController.delegate = self;
-    if (![self.fetchedResultsController performFetch:&error]) {
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -75,6 +71,12 @@
     }
     
     _fetchedResultsController = [[CarDAO shared] loadAllCarsController];
+    
+    NSError *error = nil;
+    self.fetchedResultsController.delegate = self;
+    if (![self.fetchedResultsController performFetch:&error]) {
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+    }
     return _fetchedResultsController;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

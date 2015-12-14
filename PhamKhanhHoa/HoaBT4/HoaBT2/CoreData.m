@@ -89,17 +89,18 @@
     _tmpManagedOC.parentContext = self.managedObjectContext;
     return _tmpManagedOC;
 }
+//***************
 - (NSManagedObjectContext *)writeMOC{
     if (_writeMOC != nil) {
         return _writeMOC;
     }
     
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (!coordinator) {
-        return nil;
+    if (coordinator!=nil) {
+        _writeMOC = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        [_writeMOC setPersistentStoreCoordinator:coordinator];
     }
-    _writeMOC = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-    [_writeMOC.parentContext setPersistentStoreCoordinator:coordinator];
+    
     return _writeMOC;
 }
 #pragma mark - Core Data Saving support

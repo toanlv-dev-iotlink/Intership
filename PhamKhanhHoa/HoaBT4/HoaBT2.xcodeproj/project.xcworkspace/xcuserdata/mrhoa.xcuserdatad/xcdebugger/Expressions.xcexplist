@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[CoreData managedObjectContext]:CoreData.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.writeMOC">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[CoreData writeMOC]:CoreData.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_writeMOC.parentContext ">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
