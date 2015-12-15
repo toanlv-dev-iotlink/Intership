@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MainViewController.h
 //  LoadImage
 //
 //  Created by MrHoa on 12/15/15.
@@ -7,9 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ViewController : UIViewController
-
+#import "MainTableViewCell.h"
+@interface MainViewController : UIViewController
 
 @end
-
