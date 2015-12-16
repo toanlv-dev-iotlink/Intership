@@ -11,4 +11,5 @@
 @interface MainTableViewCell : UITableViewCell
 @property (weak,nonatomic) IBOutlet UILabel *lbUrl;
 @property (weak,nonatomic) IBOutlet UIImageView *image;
+-(void)setImg:(UIImage*)img;
 @end

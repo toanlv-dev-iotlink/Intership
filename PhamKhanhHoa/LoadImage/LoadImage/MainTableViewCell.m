@@ -19,5 +19,7 @@
 
     // Configure the view for the selected state
 }
-
+- (void)setImg:(UIImage *)img{
+    self.image.image = img;
+}
 @end
