@@ -12,9 +12,7 @@
 {
     __weak IBOutlet UITableView *tbView;
     NSArray *arrUrl;
-    NSMutableArray *arrImage;
-    NSMutableDictionary *a;
-    UIImage *im;
+    NSMutableDictionary *dicImage;
 }
 @end
 
@@ -42,14 +40,14 @@
               @"http://farm2.static.flickr.com/1156/942938486_65b6d1efe7.jpg",
               @"http://farm1.static.flickr.com/28/41942696_ac7de727a7.jpg",
               @"http://farm1.static.flickr.com/27/45599281_0e33a17e35.jpg", nil];
-    arrImage = [[NSMutableArray alloc] init];
-    a = [[NSMutableDictionary alloc]init];
+    dicImage = [[NSMutableDictionary alloc]init];
     [tbView registerNib:[UINib nibWithNibName:@"MainTableViewCell" bundle:nil] forCellReuseIdentifier:@"myCell"];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return arrUrl.count;
@@ -57,25 +55,21 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MainTableViewCell *cell = [tbView dequeueReusableCellWithIdentifier:@"myCell" forIndexPath:indexPath];
+    MainTableViewCell * cell = [tbView dequeueReusableCellWithIdentifier:@"myCell" forIndexPath:indexPath];
+    cell.image.image = nil;
     cell.lbUrl.text = [arrUrl objectAtIndex:indexPath.row];
-    if ([a valueForKey:cell.lbUrl.text]!=nil) {
-        cell.image.image = [a valueForKey:cell.lbUrl.text];
-    }else{
-        [self performSelectorInBackground:@selector(loadImage:) withObject:cell];
+    if ([dicImage objectForKey:[arrUrl objectAtIndex:indexPath.row]]!=nil) {//check image in dic
+        cell.image.image = [dicImage objectForKey:[arrUrl objectAtIndex:indexPath.row]];
+    } else{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{//run background
+            UIImage * img = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[arrUrl objectAtIndex:indexPath.row]]]];//down image
+            [dicImage setObject:img forKey:[arrUrl objectAtIndex:indexPath.row]];//set image for key
+            dispatch_async(dispatch_get_main_queue(), ^{//main
+                MainTableViewCell * cell = (MainTableViewCell *)[tbView cellForRowAtIndexPath:indexPath];
+                cell.image.image = [dicImage objectForKey:[arrUrl objectAtIndex:indexPath.row]];
+            });
+        });
     }
     return cell;
-}
-
-- (void)loadImage:(MainTableViewCell*)cell{
-    NSURL *url = [NSURL URLWithString:cell.lbUrl.text];
-    NSData *data = [NSData dataWithContentsOfURL:url];
-    UIImage *img = [UIImage imageWithData:data];
-    [a setObject:img forKey:cell.lbUrl.text];
-    [self performSelectorOnMainThread:@selector(set:) withObject:cell waitUntilDone:true];
-    
-}
-- (void)set:(MainTableViewCell *)cell{
-    cell.image.image = [a valueForKey:cell.lbUrl.text];
 }
 @end
