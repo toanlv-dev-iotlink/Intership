@@ -61,6 +61,7 @@
     if ([dicImage objectForKey:[arrUrl objectAtIndex:indexPath.row]]!=nil) {//check image in dic
         cell.image.image = [dicImage objectForKey:[arrUrl objectAtIndex:indexPath.row]];
     } else{
+        //cach 1: GCD
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{//run background
             UIImage * img = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[arrUrl objectAtIndex:indexPath.row]]]];//down image
             [dicImage setObject:img forKey:[arrUrl objectAtIndex:indexPath.row]];//set image for key
@@ -69,7 +70,29 @@
                 cell.image.image = [dicImage objectForKey:[arrUrl objectAtIndex:indexPath.row]];
             });
         });
+        //cach 2: Operation
+//        NSOperationQueue *myQueue = [[NSOperationQueue alloc] init];
+//        [myQueue addOperationWithBlock:^{
+//            UIImage * img = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[arrUrl objectAtIndex:indexPath.row]]]];//down image
+//            [dicImage setObject:img forKey:[arrUrl objectAtIndex:indexPath.row]];//set image for key
+//            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+//                MainTableViewCell * cell = (MainTableViewCell *)[tbView cellForRowAtIndexPath:indexPath];
+//                cell.image.image = [dicImage objectForKey:[arrUrl objectAtIndex:indexPath.row]];
+//            }];
+//        }];
+        //cach 3:
+//        [self performSelectorInBackground:@selector(loadImage:) withObject:indexPath];
+
     }
     return cell;
+}
+- (void)loadImage:(NSIndexPath *)indexPath{
+    UIImage * img = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[arrUrl objectAtIndex:indexPath.row]]]];//down image
+    [dicImage setObject:img forKey:[arrUrl objectAtIndex:indexPath.row]];
+    [self performSelectorOnMainThread:@selector(setIm:) withObject:indexPath waitUntilDone:true];
+}
+- (void)setIm:(NSIndexPath *)indexPath{
+    MainTableViewCell * cell = (MainTableViewCell *)[tbView cellForRowAtIndexPath:indexPath];
+    cell.image.image = [dicImage objectForKey:[arrUrl objectAtIndex:indexPath.row]];
 }
 @end
