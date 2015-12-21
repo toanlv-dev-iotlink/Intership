@@ -20,7 +20,7 @@
     __weak IBOutlet UITableView *carTV;
     
 }
-@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, weak) NSFetchedResultsController *fetchedResultsController;
 
 @end
 

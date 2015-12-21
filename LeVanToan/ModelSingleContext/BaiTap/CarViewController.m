@@ -16,9 +16,7 @@
 
 
 @interface CarViewController ()<UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
-{
-    __weak IBOutlet UITableView *carTV;
-}
+@property(nonatomic, weak) IBOutlet UITableView *carTV;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
 @end
@@ -27,7 +25,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [carTV registerNib:[UINib nibWithNibName:@"CarTableViewCell" bundle:nil] forCellReuseIdentifier:@"CarTableViewCell"];
+    NSError *error = nil;
+    _fetchedResultsController = [CarDAO.shared fetchAllCar];
+    _fetchedResultsController.delegate = self;
+    if (![[self fetchedResultsController] performFetch:&error]) {
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+    }
+    [_carTV registerNib:[UINib nibWithNibName:@"CarTableViewCell" bundle:nil] forCellReuseIdentifier:@"CarTableViewCell"];
     self.navigationItem.title = @"Car List";
     
     // init barbuttonItems
@@ -35,44 +39,24 @@
     self.navigationItem.rightBarButtonItem = addButton;
     
     //init fetch
-    NSError *error = nil;
-    self.fetchedResultsController.delegate = self;
-    if (![self.fetchedResultsController performFetch:&error]) {
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-    }
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 #pragma mark - Core Data
-- (NSFetchedResultsController*)fetchedResultsController
-{
-    if(_fetchedResultsController != nil)
-    {
-        return _fetchedResultsController;
-    }
-    
-    _fetchedResultsController = [CarDAO.shared fetchAllCar];
-    
-    return _fetchedResultsController;
-}
-
-#pragma mark - UITableViewDataSource, UITableViewDelegate
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [[self.fetchedResultsController sections] count];
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-        id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+        id <NSFetchedResultsSectionInfo> sectionInfo = [[_fetchedResultsController sections] objectAtIndex:section];
         return [sectionInfo numberOfObjects];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CarTableViewCell *cell = (CarTableViewCell *)[carTV dequeueReusableCellWithIdentifier:@"CarTableViewCell" forIndexPath:indexPath];
-    Car *car = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    CarTableViewCell *cell = (CarTableViewCell *)[_carTV dequeueReusableCellWithIdentifier:@"CarTableViewCell" forIndexPath:indexPath];
+    Car *car = [_fetchedResultsController objectAtIndexPath:indexPath];
     cell.model.text = car.model;
     cell.carNumber.text = car.carNumber;
     cell.avatar.image = [[UIImage alloc] initWithData:car.avatar];
@@ -80,7 +64,7 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Car* car = (Car*)[self.fetchedResultsController objectAtIndexPath:indexPath];
+    Car* car = (Car*)[_fetchedResultsController objectAtIndexPath:indexPath];
     EditCarViewController* newVC = [[EditCarViewController alloc] init];
     newVC.myCar = car;
     newVC.myIndex = indexPath;
@@ -89,7 +73,7 @@
 }
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        Car* car = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        Car* car = [_fetchedResultsController objectAtIndexPath:indexPath];
         [[CarDAO shared] deleteCar:car];
     }
 }
@@ -101,14 +85,14 @@
     [self.navigationController pushViewController:addVC animated:YES];
 }
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-    [carTV beginUpdates];
+    [_carTV beginUpdates];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
        atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath {
     
-    UITableView *tableView = carTV;
+    UITableView *tableView = _carTV;
     
     switch(type) {
             
@@ -134,6 +118,6 @@
     }
 }
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    [carTV endUpdates];
+    [_carTV endUpdates];
 }
 @end
