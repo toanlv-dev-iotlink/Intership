@@ -19,6 +19,12 @@
 		354C2A511C23C70E0004E598 /* WeatherViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 354C2A4F1C23C70E0004E598 /* WeatherViewController.xib */; };
 		354C2A551C23C9F60004E598 /* WeatherTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 354C2A531C23C9F60004E598 /* WeatherTableViewCell.m */; };
 		354C2A561C23C9F60004E598 /* WeatherTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 354C2A541C23C9F60004E598 /* WeatherTableViewCell.xib */; };
+		AE1A328E1C28171000626AA3 /* dep.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE1A328D1C28171000626AA3 /* dep.jpg */; };
+		AE5FEE701C27D06A00B2B643 /* DefaultWeather.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE5FEE6F1C27D06A00B2B643 /* DefaultWeather.jpg */; };
+		AE5FEE721C27D2D300B2B643 /* ImageView.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE5FEE711C27D2D300B2B643 /* ImageView.jpg */; };
+		AE5FEE761C27D57900B2B643 /* 1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = AE5FEE751C27D57900B2B643 /* 1.jpeg */; };
+		AE5FEE781C27D69D00B2B643 /* 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE5FEE771C27D69D00B2B643 /* 2.jpg */; };
+		AE5FEE7A1C27DF2E00B2B643 /* 3.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = AE5FEE791C27DF2E00B2B643 /* 3.jpeg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +58,12 @@
 		354C2A521C23C9F60004E598 /* WeatherTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherTableViewCell.h; sourceTree = "<group>"; };
 		354C2A531C23C9F60004E598 /* WeatherTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherTableViewCell.m; sourceTree = "<group>"; };
 		354C2A541C23C9F60004E598 /* WeatherTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeatherTableViewCell.xib; sourceTree = "<group>"; };
+		AE1A328D1C28171000626AA3 /* dep.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = dep.jpg; sourceTree = "<group>"; };
+		AE5FEE6F1C27D06A00B2B643 /* DefaultWeather.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = DefaultWeather.jpg; path = ../DefaultWeather.jpg; sourceTree = "<group>"; };
+		AE5FEE711C27D2D300B2B643 /* ImageView.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ImageView.jpg; sourceTree = "<group>"; };
+		AE5FEE751C27D57900B2B643 /* 1.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpeg; sourceTree = "<group>"; };
+		AE5FEE771C27D69D00B2B643 /* 2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpg; sourceTree = "<group>"; };
+		AE5FEE791C27DF2E00B2B643 /* 3.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3.jpeg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +107,12 @@
 		350847FF1C22B19900B445C3 /* DemoWeather */ = {
 			isa = PBXGroup;
 			children = (
+				AE1A328D1C28171000626AA3 /* dep.jpg */,
+				AE5FEE791C27DF2E00B2B643 /* 3.jpeg */,
+				AE5FEE771C27D69D00B2B643 /* 2.jpg */,
+				AE5FEE751C27D57900B2B643 /* 1.jpeg */,
+				AE5FEE711C27D2D300B2B643 /* ImageView.jpg */,
+				AE5FEE6F1C27D06A00B2B643 /* DefaultWeather.jpg */,
 				350848041C22B19900B445C3 /* AppDelegate.h */,
 				350848051C22B19900B445C3 /* AppDelegate.m */,
 				3508480D1C22B19900B445C3 /* Images.xcassets */,
@@ -223,7 +241,13 @@
 				354C2A511C23C70E0004E598 /* WeatherViewController.xib in Resources */,
 				354C2A561C23C9F60004E598 /* WeatherTableViewCell.xib in Resources */,
 				3508480E1C22B19900B445C3 /* Images.xcassets in Resources */,
+				AE5FEE701C27D06A00B2B643 /* DefaultWeather.jpg in Resources */,
+				AE5FEE781C27D69D00B2B643 /* 2.jpg in Resources */,
+				AE5FEE721C27D2D300B2B643 /* ImageView.jpg in Resources */,
+				AE5FEE761C27D57900B2B643 /* 1.jpeg in Resources */,
 				3508482D1C22B22D00B445C3 /* HomeViewController.xib in Resources */,
+				AE5FEE7A1C27DF2E00B2B643 /* 3.jpeg in Resources */,
+				AE1A328E1C28171000626AA3 /* dep.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

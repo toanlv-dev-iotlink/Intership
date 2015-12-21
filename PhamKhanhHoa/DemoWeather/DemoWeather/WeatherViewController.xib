@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WeatherViewController">
             <connections>
+                <outlet property="imageCurrent" destination="eNT-yO-uMz" id="F7F-1v-JLe"/>
                 <outlet property="lbCity" destination="gvY-ZL-2Br" id="vBK-1j-uS4"/>
                 <outlet property="lbCurrentDC" destination="QNY-ww-ZaX" id="Jsl-rE-y1p"/>
                 <outlet property="lbName" destination="wfJ-8e-Fp4" id="Ssl-3v-VdN"/>
@@ -19,31 +20,34 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gvY-ZL-2Br" userLabel="lbCity">
-                    <rect key="frame" x="19" y="122" width="90" height="21"/>
+                    <rect key="frame" x="19" y="109" width="185" height="34"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfJ-8e-Fp4" userLabel="lbName">
-                    <rect key="frame" x="19" y="151" width="90" height="21"/>
+                    <rect key="frame" x="19" y="151" width="185" height="33"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QNY-ww-ZaX" userLabel="lbCurrentDC">
-                    <rect key="frame" x="284" y="122" width="66" height="56"/>
+                    <rect key="frame" x="256" y="122" width="111" height="56"/>
                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="s9t-SZ-73H" userLabel="tbvLoadData">
                     <rect key="frame" x="0.0" y="212" width="375" height="455"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="hxT-Qh-hHy"/>
                         <outlet property="delegate" destination="-1" id="Tey-ZN-XLg"/>
                     </connections>
                 </tableView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eNT-yO-uMz" userLabel="imCurrent">
+                    <rect key="frame" x="145" y="86" width="86" height="82"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>

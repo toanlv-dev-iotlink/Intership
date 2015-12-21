@@ -10,5 +10,7 @@
 #import "WeatherTableViewCell.h"
 
 @interface WeatherViewController : UIViewController
-
+@property(nonatomic, strong) NSString *loc;
+@property double lat;
+@property double lon;
 @end

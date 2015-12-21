@@ -18,8 +18,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-//    HomeViewController *homeVC = [[HomeViewController alloc] init];
-    WeatherViewController *homeVC = [[WeatherViewController alloc] init];
+    HomeViewController *homeVC = [[HomeViewController alloc] init];
+//    WeatherViewController *homeVC = [[WeatherViewController alloc] init];
     UINavigationController *homeNAV = [[UINavigationController alloc] initWithRootViewController:homeVC];
     self.window.rootViewController = homeNAV;
     [self.window makeKeyAndVisible];

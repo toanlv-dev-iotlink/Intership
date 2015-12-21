@@ -7,6 +7,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController">
             <connections>
                 <outlet property="mymapView" destination="fIi-7N-Vso" id="6ft-3O-zDz"/>
+                <outlet property="tfLat" destination="iOW-2F-Qa9" id="xRn-jp-8dP"/>
+                <outlet property="tfLocality" destination="YX3-n1-wAi" id="V2W-vh-7jO"/>
+                <outlet property="tfLong" destination="W0g-Oq-DTl" id="nxd-2Q-G0H"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -54,7 +57,7 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="actionDropin:" destination="-1" eventType="touchUpInside" id="P7R-UH-GyE"/>
+                        <action selector="actionDropin:" destination="-1" eventType="touchUpInside" id="R4M-qF-QcR"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hu9-o5-KEM">
@@ -69,6 +72,24 @@
                         <outlet property="delegate" destination="-1" id="zda-Og-Dqx"/>
                     </connections>
                 </mapView>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z2F-8B-12C">
+                    <rect key="frame" x="307" y="629" width="65" height="30"/>
+                    <state key="normal" title="ZoomOut">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="zoomOut:" destination="-1" eventType="touchUpInside" id="h8G-Fb-L6U"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f7V-1d-8ag">
+                    <rect key="frame" x="242" y="629" width="60" height="30"/>
+                    <state key="normal" title="ZoomIn">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="zoomIn:" destination="-1" eventType="touchUpInside" id="Eat-tS-Wdf"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
