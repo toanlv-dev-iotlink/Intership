@@ -10,13 +10,14 @@
 
 @interface GameOverViewController ()
 
+
 @end
 
 @implementation GameOverViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    _scoreLb.text = _score;
 }
 
 - (void)didReceiveMemoryWarning {
