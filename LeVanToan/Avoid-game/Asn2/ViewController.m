@@ -5,19 +5,23 @@
 //  Created by Z on 12/22/15.
 //  Copyright (c) 2015 Z. All rights reserved.
 //
-
+#define maxShoot 5
 #import "ViewController.h"
 #import "GameOverViewController.h"
 @interface ViewController ()
 @property (strong, nonatomic) IBOutlet UIImageView *player;
 @property (strong, nonatomic) NSMutableArray *enemies;
 @property (strong, nonatomic) NSMutableArray *bullets;
+@property (strong, nonatomic) NSMutableArray *boomViews;
 @property CADisplayLink *displayLink;
 @property int score;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLb;
 @property UInt8 *data1;
 @property UInt8 *data2;
 @property UInt8 *data3;
+@property CGPoint panLoccation;
+@property int checkShoot;
+@property (strong, nonatomic) NSMutableArray *booms;
 @end
 
 @implementation ViewController
@@ -37,8 +41,20 @@
 }
 -(void)customInit{
     _score = 0;
+    _checkShoot = 0;
+    UIImage *boom = [UIImage imageNamed:@"myBoom.png"];
+    for (int j = 0; j < 6; j++) {
+        for (int i = 0; i < 5; i++) {
+            CGRect fromRect = CGRectMake(i*192, j*192, 192, 192);
+            CGImageRef drawImage = CGImageCreateWithImageInRect(boom.CGImage, fromRect);
+            UIImage *newImage = [UIImage imageWithCGImage:drawImage];
+            [_booms addObject:newImage];
+            //CGImageRelease(drawImage);
+        }
+    }
     _enemies = [[NSMutableArray alloc] init];
     _bullets = [[NSMutableArray alloc] init];
+    _boomViews = [[NSMutableArray alloc] init];
 }
 -(void)createDataPixel{
     CFDataRef pixelData1 = CGDataProviderCopyData(CGImageGetDataProvider([UIImage imageNamed:@"player_ok.png"].CGImage));
@@ -65,9 +81,10 @@
 
 -(void)timerCallBack:(CADisplayLink *)sender{
     [self moveEnemiesAndCheckCollision];
-    [self createBullet];
+    [self moveBulletAndCheckCollision];
     [self createEnemy];
-    [self removeAndScore];
+    [self removeEnemyAndScore];
+    [self removeBulletAndScore];
 }
 -(void)createBullet{
     UIImageView *iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bullet.png"]];
@@ -75,17 +92,68 @@
     new.origin.x = _player.frame.origin.x+ _player.frame.size.width/2;
     new.origin.y = self.view.frame.size.height-_player.frame.size.height;
     iv.frame= new;
-    int check = rand() % 100;
-    if (check == 1) {
-        [self.bullets addObject:iv];
-        [self.view addSubview:iv];
-    }
+    [self.bullets addObject:iv];
+    [self.view addSubview:iv];
 }
 -(void)moveBulletAndCheckCollision{
-    
+    if (_bullets.count) {
+        for (int i = 0; i<_bullets.count; i++) {
+            UIImageView *bullet = (UIImageView *)[_bullets objectAtIndex:i];
+            CGRect newFrame = bullet.frame;
+            newFrame.origin.y-=5;
+            bullet.frame = newFrame;
+            for (int i = 0; i<_enemies.count; i++) {
+                UIImageView *enemy = (UIImageView *)[_enemies objectAtIndex:i];
+                if (aCollisionB(bullet, enemy)) {
+                    int x1 = MAX(enemy.frame.origin.x, bullet.frame.origin.x);
+                    int y1 = MAX(enemy.frame.origin.y, bullet.frame.origin.y);
+                    int x2 = MIN(enemy.frame.origin.x+enemy.frame.size.width, bullet.frame.origin.x+bullet.frame.size.width);
+                    int y2 = MIN(enemy.frame.origin.y+enemy.frame.size.height, bullet.frame.origin.y+bullet.frame.size.height);
+                    BOOL check = false;
+                    for (int i = x1; i <= x2; i++) {
+                        for (int j = y1; j <= y2; j++) {
+                            if ([self isCollision2:i y:j image1:enemy image2:bullet]) {
+                                [bullet removeFromSuperview];
+                                [_bullets removeObject:bullet];
+                                [self removeEnemy:enemy];
+                                _score+=15;
+                                _scoreLb.text = @(_score).stringValue;
+                                check = true;
+                                break;
+                            }
+                            
+                        }
+                        if (check) {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+//-(void)removeBoom{
+//    if(_boomViews.count){
+//        for (int i = 0; i < _boomViews.count; i++) {
+//            <#statements#>
+//        }
+//    }
+//}
+-(void)removeEnemy:(UIImageView *)enemyView{
+    UIImageView *a = [[UIImageView alloc] initWithFrame:enemyView.frame];
+    [enemyView removeFromSuperview];
+    [_enemies removeObject:enemyView];
 }
 -(void)removeBulletAndScore{
-    
+    if (_bullets.count) {
+        for (int i = 0; i<_bullets.count; i++) {
+            UIImageView *temp = (UIImageView *)[_bullets objectAtIndex:i];
+            if (temp.frame.origin.y <= 0) {
+                [temp removeFromSuperview];
+                [_bullets removeObject:temp];
+            }
+        }
+    }
 }
 -(void)createEnemy{
     
@@ -133,42 +201,9 @@
             }
         }
     }
-    if (_bullets.count) {
-        for (int i = 0; i<_bullets.count; i++) {
-            UIImageView *bullet = (UIImageView *)[_bullets objectAtIndex:i];
-            CGRect newFrame = bullet.frame;
-            newFrame.origin.y-=5;
-            bullet.frame = newFrame;
-            for (int i = 0; i<_enemies.count; i++) {
-                UIImageView *enemy = (UIImageView *)[_enemies objectAtIndex:i];
-                if (aCollisionB(bullet, enemy)) {
-                    int x1 = MAX(enemy.frame.origin.x, bullet.frame.origin.x);
-                    int y1 = MAX(enemy.frame.origin.y, bullet.frame.origin.y);
-                    int x2 = MIN(enemy.frame.origin.x+enemy.frame.size.width, bullet.frame.origin.x+bullet.frame.size.width);
-                    int y2 = MIN(enemy.frame.origin.y+enemy.frame.size.height, bullet.frame.origin.y+bullet.frame.size.height);
-                    BOOL check = false;
-                    for (int i = x1; i <= x2; i++) {
-                        for (int j = y1; j <= y2; j++) {
-                            if ([self isCollision2:i y:j image1:enemy image2:bullet]) {
-                                [enemy removeFromSuperview];
-                                [bullet removeFromSuperview];
-                                [_enemies removeObject:enemy];
-                                [_bullets removeObject:bullet];
-                                check = true;
-                                break;
-                            }
-                        
-                        }
-                        if (check) {
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-    }
+    
 }
--(void)removeAndScore{
+-(void)removeEnemyAndScore{
     if (_enemies.count) {
         for (int i = 0; i<_enemies.count; i++) {
             UIImageView *temp = (UIImageView *)[_enemies objectAtIndex:i];
@@ -185,8 +220,21 @@
     UIPanGestureRecognizer *pan = (UIPanGestureRecognizer *)sender;
     CGRect newFrame = self.player.frame;
     CGPoint point = [pan locationInView:self.player.superview];
+    if (point.y<_panLoccation.y) {
+        if (_checkShoot == maxShoot) {
+            [self createBullet];
+            _checkShoot = 0;
+        }
+        else{
+            _checkShoot++;
+        }
+    }
+    else{
+        _checkShoot = 0;
+    }
     newFrame.origin.x = point.x-self.player.frame.size.width/2;
     self.player.frame = newFrame;
+    _panLoccation = point;
 }
 BOOL
 aCollisionB(UIImageView* a,UIImageView* b){
