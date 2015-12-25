@@ -26,6 +26,7 @@
     self.navigationItem.title = @"HomePage";
     locationManager = [[CLLocationManager alloc]init];
     locationManager.delegate = self;
+    [self getLocation];
     if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
         [locationManager requestWhenInUseAuthorization];
     }
@@ -63,6 +64,7 @@
     
     CGPoint point = [recognizer locationInView:mymapView];
     CLLocationCoordinate2D tapPoint = [mymapView convertPoint:point toCoordinateFromView:mymapView];
+    
     NSString *urlString = [NSString stringWithFormat:@"http://maps.googleapis.com/maps/api/geocode/json?latlng=%f,%f&sensor=false",tapPoint.latitude, tapPoint.longitude];
     NSError* error;
     NSString *locationString = [NSString stringWithContentsOfURL:[NSURL URLWithString:urlString] encoding:NSASCIIStringEncoding error:&error];
@@ -78,7 +80,12 @@
             if ([info objectForKey:@"long_name"]) {
                 NSString *region = [info objectForKey:@"long_name"];
                 tfLocality.text = region;
-
+                [mymapView removeAnnotations:[mymapView annotations]];
+                MKPointAnnotation *poinAn = [[MKPointAnnotation alloc] init];
+                poinAn.title = [info objectForKey:@"long_name"];
+                poinAn.coordinate = tapPoint;
+                [mymapView addAnnotation:poinAn];
+                
             }else{
                 tfLocality.text = @"";
                 return;
@@ -94,35 +101,35 @@
     }
 }
 
-//- (void)getLocation:(do){
-//    CLGeocoder *ceo = [[CLGeocoder alloc]init];
-//    CLLocation *loc = [[CLLocation alloc]initWithLatitude:26.93611 longitude:26.93611];
-//    
-//    [ceo reverseGeocodeLocation: loc completionHandler:
-//     ^(NSArray *placemarks, NSError *error) {
-//         CLPlacemark *placemark = [placemarks objectAtIndex:0];
+- (void)getLocation{
+    CLGeocoder *ceo = [[CLGeocoder alloc]init];
+    CLLocation *loc = [[CLLocation alloc]initWithLatitude:22.30 longitude:104.48];
+    
+    [ceo reverseGeocodeLocation: loc completionHandler:
+     ^(NSArray *placemarks, NSError *error) {
+         CLPlacemark *placemark = [placemarks lastObject];
 //         NSLog(@"placemark %@",placemark);
-//         //String to hold address
-//         NSString *locatedAt = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
+         //String to hold address
+         //NSString *locatedAt = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
 //         NSLog(@"addressDictionary %@", placemark.addressDictionary);
 //         
 //         NSLog(@"placemark %@",placemark.region);
-//         NSLog(@"placemark %@",placemark.country);  // Give Country Name
+         NSLog(@"placemark %@",placemark.country);  // Give Country Name
 //         NSLog(@"placemark %@",placemark.locality); // Extract the city name
 //         NSLog(@"location %@",placemark.name);
 //         NSLog(@"location %@",placemark.ocean);
 //         NSLog(@"location %@",placemark.postalCode);
 //         NSLog(@"location %@",placemark.subLocality);
-//         
-//         NSLog(@"location %@",placemark.location);
-//         //Print the location to console
+         
+         NSLog(@"location %@",placemark.location);
+         //Print the location to console
 //         NSLog(@"I am currently at %@",locatedAt);
-//         
-//         
-//         
-//         
-//     }];
-//}
+         
+         
+         
+         
+     }];
+}
 
 - (IBAction)zoomIn:(id)sender {
     MKCoordinateSpan span;
