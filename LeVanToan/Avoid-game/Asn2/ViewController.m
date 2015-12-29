@@ -5,7 +5,7 @@
 //  Created by Z on 12/22/15.
 //  Copyright (c) 2015 Z. All rights reserved.
 //
-#define maxShoot 5
+#define maxShoot 4
 #import "ViewController.h"
 #import "GameOverViewController.h"
 @interface ViewController ()
@@ -13,7 +13,6 @@
 @property (strong, nonatomic) NSMutableArray *enemies;
 @property (strong, nonatomic) NSMutableArray *bullets;
 @property (strong, nonatomic) NSMutableArray *boomViews;
-@property CADisplayLink *displayLink;
 @property int score;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLb;
 @property UInt8 *data1;
@@ -22,6 +21,7 @@
 @property CGPoint panLoccation;
 @property int checkShoot;
 @property (strong, nonatomic) NSMutableArray *booms;
+@property BOOL playerDied;
 @end
 
 @implementation ViewController
@@ -32,8 +32,9 @@
     [self customInit];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"space1.png"]];
     
-    _player = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2-45, self.view.frame.size.height-118, 89, 118)];
-    _player.image = [UIImage imageNamed:@"player_ok.png"];
+    _player = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2-32, self.view.frame.size.height-64, 64, 64)];
+    _player.image = [UIImage imageNamed:@"ship.png"];
+    
     [self.view addSubview:_player];
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(movePlayer:)];
 
@@ -42,14 +43,16 @@
 -(void)customInit{
     _score = 0;
     _checkShoot = 0;
-    UIImage *boom = [UIImage imageNamed:@"myBoom.png"];
+    _playerDied = false;
+    _booms = [[NSMutableArray alloc] init];
+    UIImage *boom = [UIImage imageNamed:@"boom.png"];
     for (int j = 0; j < 6; j++) {
         for (int i = 0; i < 5; i++) {
             CGRect fromRect = CGRectMake(i*192, j*192, 192, 192);
             CGImageRef drawImage = CGImageCreateWithImageInRect(boom.CGImage, fromRect);
             UIImage *newImage = [UIImage imageWithCGImage:drawImage];
             [_booms addObject:newImage];
-            //CGImageRelease(drawImage);
+            CGImageRelease(drawImage);
         }
     }
     _enemies = [[NSMutableArray alloc] init];
@@ -57,9 +60,9 @@
     _boomViews = [[NSMutableArray alloc] init];
 }
 -(void)createDataPixel{
-    CFDataRef pixelData1 = CGDataProviderCopyData(CGImageGetDataProvider([UIImage imageNamed:@"player_ok.png"].CGImage));
+    CFDataRef pixelData1 = CGDataProviderCopyData(CGImageGetDataProvider([UIImage imageNamed:@"ship.png"].CGImage));
     _data1 = (UInt8 *)CFDataGetBytePtr(pixelData1);
-    CFDataRef pixelData2 = CGDataProviderCopyData(CGImageGetDataProvider([UIImage imageNamed:@"smiley2_ok.png"].CGImage));
+    CFDataRef pixelData2 = CGDataProviderCopyData(CGImageGetDataProvider([UIImage imageNamed:@"monster.png"].CGImage));
     _data2 = (UInt8 *)CFDataGetBytePtr(pixelData2);
     CFDataRef pixelData3 = CGDataProviderCopyData(CGImageGetDataProvider([UIImage imageNamed:@"bullet.png"].CGImage));
     _data3 = (UInt8 *)CFDataGetBytePtr(pixelData3);
@@ -75,16 +78,16 @@
     CADisplayLink *dl = [CADisplayLink displayLinkWithTarget:self selector:@selector(timerCallBack:)];
     dl.frameInterval = 0.04;
     [dl addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
-    self.displayLink = dl;
 }
 
 
 -(void)timerCallBack:(CADisplayLink *)sender{
-    [self moveEnemiesAndCheckCollision];
+    [self moveEnemiesAndCheckCollision:sender];
     [self moveBulletAndCheckCollision];
     [self createEnemy];
     [self removeEnemyAndScore];
     [self removeBulletAndScore];
+    [self removeBoom];
 }
 -(void)createBullet{
     UIImageView *iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bullet.png"]];
@@ -132,17 +135,26 @@
         }
     }
 }
-//-(void)removeBoom{
-//    if(_boomViews.count){
-//        for (int i = 0; i < _boomViews.count; i++) {
-//            <#statements#>
-//        }
-//    }
-//}
+-(void)removeBoom{
+    if(_boomViews.count){
+        for (int i = 0; i < _boomViews.count; i++) {
+            UIImageView *boomView = [_boomViews objectAtIndex:i];
+            if (!boomView.isAnimating) {
+                [boomView removeFromSuperview];
+                [_boomViews removeObject:boomView];
+            }
+        }
+    }
+}
 -(void)removeEnemy:(UIImageView *)enemyView{
     UIImageView *a = [[UIImageView alloc] initWithFrame:enemyView.frame];
     [enemyView removeFromSuperview];
     [_enemies removeObject:enemyView];
+    [self.view addSubview:a];
+    a.animationImages = _booms;
+    a.animationDuration = 1.5;
+    a.animationRepeatCount = 1;
+    [a startAnimating];
 }
 -(void)removeBulletAndScore{
     if (_bullets.count) {
@@ -158,19 +170,35 @@
 -(void)createEnemy{
     
     int xRandom =  arc4random_uniform(self.view.frame.size.width-64);
-    UIImageView *iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"smiley2_ok.png"]];
+    UIImageView *iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"monster.png"]];
     CGRect new = iv.frame;
     new.origin.x = xRandom;
-    new.origin.y = 0;
+    new.origin.y = -48;
     iv.frame= new;
     //iv.backgroundColor = [UIColor redColor];
     int check = rand() % 50;
-    if ((check == 1)&&(_enemies.count < 10)) {
+    if ((check == 1)&&(_enemies.count < 100)) {
         [self.enemies addObject:iv];
         [self.view addSubview:iv];
+        //[self removeEnemy:iv];
     }
 }
--(void)moveEnemiesAndCheckCollision{
+-(void)killPlayer{
+    _playerDied = true;
+    CGRect frame = CGRectMake(_player.center.x - 96, _player.center.y - 96, 192, 192);
+    _player.frame = frame;
+    _player.animationImages = _booms;
+    _player.animationDuration = 1.5;
+    _player.animationRepeatCount = 1;
+    [_player startAnimating];
+}
+-(void)gameOverIfdied:(CADisplayLink *)sender{
+    if ((_playerDied)&&(![_player isAnimating])) {
+        [sender removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+        [self performSegueWithIdentifier:@"GameOver" sender:nil];
+    }
+}
+-(void)moveEnemiesAndCheckCollision:(CADisplayLink *)sender{
     if (_enemies.count) {
         for (int i = 0; i<_enemies.count; i++) {
             UIImageView *temp = (UIImageView *)[_enemies objectAtIndex:i];
@@ -186,8 +214,11 @@
                 for (int i = x1; i <= x2; i++) {
                     for (int j = y1; j <= y2; j++) {
                         if ([self isCollision:i y:j image1:_player image2:temp]) {
-                            [self stop];
-                            [self performSegueWithIdentifier:@"GameOver" sender:nil];
+                            [sender removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+                            CADisplayLink *dl = [CADisplayLink displayLinkWithTarget:self selector:@selector(gameOverIfdied:)];
+                            dl.frameInterval = 0.04;
+                            [dl addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+                            [self killPlayer];
                             check = true;
                             break;
                         }
@@ -260,9 +291,6 @@ pInsideB(CGPoint p, UIImageView* b)
         return true;
     }
     return false;
-}
--(void)stop{
-    [self.displayLink removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
 }
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     GameOverViewController *new = segue.destinationViewController;
