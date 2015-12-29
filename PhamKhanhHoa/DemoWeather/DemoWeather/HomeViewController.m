@@ -26,7 +26,6 @@
     self.navigationItem.title = @"HomePage";
     locationManager = [[CLLocationManager alloc]init];
     locationManager.delegate = self;
-    [self getLocation];
     if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
         [locationManager requestWhenInUseAuthorization];
     }
@@ -43,32 +42,19 @@
 }
 
 - (IBAction)actionDropin:(NSObject*)sender{
-    //    if ([tfLocality.text  isEqual: @""]) {
-    //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Not find the Locality"
-    //                                                        message:@"You must choose the correct location."
-    //                                                       delegate:nil
-    //                                              cancelButtonTitle:@"OK"
-    //                                              otherButtonTitles:nil];
-    //        [alert show];
-    //    } else {
     WeatherViewController *wView = [[WeatherViewController alloc] init];
     wView.loc = tfLocality.text;
     wView.lat = [tfLat.text doubleValue];
     wView.lon = [tfLong.text doubleValue];
     [self.navigationController pushViewController:wView animated:true];
-    //    }
 }
 
 -(void)foundTap:(UITapGestureRecognizer *)recognizer {
-    
-    
     CGPoint point = [recognizer locationInView:mymapView];
     CLLocationCoordinate2D tapPoint = [mymapView convertPoint:point toCoordinateFromView:mymapView];
-    
     NSString *urlString = [NSString stringWithFormat:@"http://maps.googleapis.com/maps/api/geocode/json?latlng=%f,%f&sensor=false",tapPoint.latitude, tapPoint.longitude];
     NSError* error;
     NSString *locationString = [NSString stringWithContentsOfURL:[NSURL URLWithString:urlString] encoding:NSASCIIStringEncoding error:&error];
-    
     NSData *data = [locationString dataUsingEncoding:NSUTF8StringEncoding];
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
     tfLat.text = [NSString stringWithFormat:@"%f",tapPoint.latitude];
@@ -101,36 +87,6 @@
     }
 }
 
-- (void)getLocation{
-    CLGeocoder *ceo = [[CLGeocoder alloc]init];
-    CLLocation *loc = [[CLLocation alloc]initWithLatitude:22.30 longitude:104.48];
-    
-    [ceo reverseGeocodeLocation: loc completionHandler:
-     ^(NSArray *placemarks, NSError *error) {
-         CLPlacemark *placemark = [placemarks lastObject];
-//         NSLog(@"placemark %@",placemark);
-         //String to hold address
-         //NSString *locatedAt = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
-//         NSLog(@"addressDictionary %@", placemark.addressDictionary);
-//         
-//         NSLog(@"placemark %@",placemark.region);
-         NSLog(@"placemark %@",placemark.country);  // Give Country Name
-//         NSLog(@"placemark %@",placemark.locality); // Extract the city name
-//         NSLog(@"location %@",placemark.name);
-//         NSLog(@"location %@",placemark.ocean);
-//         NSLog(@"location %@",placemark.postalCode);
-//         NSLog(@"location %@",placemark.subLocality);
-         
-         NSLog(@"location %@",placemark.location);
-         //Print the location to console
-//         NSLog(@"I am currently at %@",locatedAt);
-         
-         
-         
-         
-     }];
-}
-
 - (IBAction)zoomIn:(id)sender {
     MKCoordinateSpan span;
     span.latitudeDelta = mymapView.region.span.latitudeDelta * 2;
@@ -150,22 +106,5 @@
     region.center = mymapView.region.center;
     
     [mymapView setRegion:region animated:YES];
-}
-
--(void)loadData:(UITapGestureRecognizer *)recognizer {
-    CGPoint point = [recognizer locationInView:mymapView];
-    CLLocationCoordinate2D tapPoint = [mymapView convertPoint:point toCoordinateFromView:mymapView];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{//run background
-        NSString *url = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/forecast/daily?lat=%f&lon=%f&cnt=2&mode=json&appid=2de143494c0b295cca9337e1e96b00e0",tapPoint.latitude,tapPoint.longitude];
-        NSURL *googleRequestURL=[NSURL URLWithString:url];
-        NSData* data = [NSData dataWithContentsOfURL: googleRequestURL];
-        NSError* error;
-        NSDictionary *json = [NSJSONSerialization
-                              JSONObjectWithData:data
-                              options:kNilOptions
-                              error:&error];
-        NSArray *list = [json objectForKey:@"list"];
-        NSArray *city = [json objectForKey:@"city"];
-    });
 }
 @end

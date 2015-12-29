@@ -27,7 +27,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     lbCity.text = nil;
-    NSLog(@"%@",self.loc);
     dicImage = [[NSMutableDictionary alloc] init];
     dicList = [[NSMutableDictionary alloc] init];
     tbvWeather.tableFooterView = [[UITableView alloc] initWithFrame: CGRectZero];
@@ -115,7 +114,6 @@
                     }
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{//run background
                         NSString *idimg = [[[[list objectAtIndex:indexPath.row] objectForKey:@"weather"] objectAtIndex:0] objectForKey:@"icon"];
-                        NSLog(@"%@",idimg);
                         UIImage * img = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[dicIM objectForKey:idimg]]]];//down image
                         [dicImage setObject:img forKey:[weekday objectAtIndex:indexPath.row]];//set image for key
                         dispatch_async(dispatch_get_main_queue(), ^{//main

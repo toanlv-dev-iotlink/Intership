@@ -86,12 +86,12 @@
     }
     return cell;
 }
-- (void)loadImage:(NSIndexPath *)indexPath{
+- (void)loadImage:(NSIndexPath *)indexPath{//cach3
     UIImage * img = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[arrUrl objectAtIndex:indexPath.row]]]];//down image
     [dicImage setObject:img forKey:[arrUrl objectAtIndex:indexPath.row]];
     [self performSelectorOnMainThread:@selector(setIm:) withObject:indexPath waitUntilDone:true];
 }
-- (void)setIm:(NSIndexPath *)indexPath{
+- (void)setIm:(NSIndexPath *)indexPath{//cach3
     MainTableViewCell * cell = (MainTableViewCell *)[tbView cellForRowAtIndexPath:indexPath];
     cell.image.image = [dicImage objectForKey:[arrUrl objectAtIndex:indexPath.row]];
 }
